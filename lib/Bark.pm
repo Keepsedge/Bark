@@ -1,58 +1,74 @@
 package Bark;
 
-use 5.032001;
+use 5.008009;
 use strict;
 use warnings;
 
-require Exporter;
-use AutoLoader qw(AUTOLOAD);
-
-our @ISA = qw(Exporter);
-
-# Items to export into callers namespace by default. Note: do not export
-# names by default without a very good reason. Use EXPORT_OK instead.
-# Do not simply export all your public functions/methods/constants.
-
-# This allows declaration	use Bark ':all';
-# If you do not need this, moving things directly into @EXPORT or @EXPORT_OK
-# will save memory.
-our %EXPORT_TAGS = ( 'all' => [ qw(
-	
-) ] );
-
-our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
-
-our @EXPORT = qw(
-	
-);
-
-our $VERSION = '0.01';
+use UNIVERSAL::moniker;
+use Module::Pluggable search_path=>'Bark::Plugins', initialize=>0;
 
 
-# Preloaded methods go here.
+sub new 
+{
+  my $this = shift;
+  my $class = ref $this || $this;
+  my $self;
+     $self->{version} = $VERSION;
+  bless($self, $class)
 
-# Autoload methods go after =cut, and are processed by the autosplit program.
+  my %params = @_;
+  if($params{load_plugins})
+  {
+    $self->_initialize();
+  }
+  return $self;
+}
+
+sub _initialize
+{
+  my $self = shift;
+  $self->{_plugin_count} = 0;
+  foreach my $plugin ($self->plugins())
+  {
+    eval "use $plugin"
+    if(!$@)
+    {
+      my $shortname = $plugin->moniker();
+      $self->{$shortname} = $plugin->load();
+      $self->{_plugin_count}++;
+    }
+    else
+    {
+      warn "$plugin not usable";
+    }
+  }
+}
+
+sub getPluginCount {
+  my $self = shift;
+  return $self->{_plugin_count}
+}
+
+
 
 1;
 __END__
-# Below is stub documentation for your module. You'd better edit it!
 
 =head1 NAME
 
-Bark - Perl extension for blah blah blah
+Bark - Perl extension for Data Delivery
 
 =head1 SYNOPSIS
 
   use Bark;
-  blah blah blah
+  my $c = Bark->new(load_plugins=>1);
 
 =head1 DESCRIPTION
 
-Stub documentation for Bark, created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
-
-Blah blah blah.
+Bark can be used to deliver data from any data source, for pretty much any endpoint.
+Bark uses a plugin system L<Module::Pluggable> to load and instintate needed code
+bases to preform tasks. Load only modules you need, to keep the code base small, and
+preformant.
 
 =head2 EXPORT
 
@@ -62,22 +78,18 @@ None by default.
 
 =head1 SEE ALSO
 
-Mention other useful documentation such as the documentation of
-related modules or operating system documentation (such as man pages
-in UNIX), or any relevant external documentation such as RFCs or
-standards.
+L<Module::Pluggable>
+L<Class::DBI>
+L<JSON::XS>
 
-If you have a mailing list set up for your module, mention it here.
-
-If you have a web site set up for your module, mention it here.
 
 =head1 AUTHOR
 
-A. U. Thor, E<lt>a.u.thor@a.galaxy.far.far.awayE<gt>
+JSullivan, E<lt>energy.keeper@gmail.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2022 by A. U. Thor
+Copyright (C) 2022 by JSullivan
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.32.1 or,
