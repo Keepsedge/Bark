@@ -12,8 +12,8 @@ jobs:
     - checkout
     # code is checked out
     - run:
-        name: "CPAN test"
-        command: "cpan -v"
+        name: "CPAN fast configure"
+        command: "(echo y;echo o conf prerequisites_policy follow;echo o conf commit)|cpan"
     - run:
         name: "install universal moniker"
         command: "perl -MCPAN -e 'install UNIVERSAL::moniker'"
