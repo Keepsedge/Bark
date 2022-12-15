@@ -12,6 +12,9 @@ jobs:
     - checkout
     # code is checked out
     - run:
+        name: "CPAN test"
+        command: "cpan -v"
+    - run:
         name: "install universal moniker"
         command: "perl -MCPAN -e 'install UNIVERSAL::moniker'"
     - run:
