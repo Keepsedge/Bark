@@ -10,9 +10,16 @@ jobs:
       - image: cimg/base:stable
     steps:
     - checkout
+    # code is checked out
     - run:
         name: "perl environment"
-        command: "perl -v"
+        command: "perl Makefile.PL"
+    - run:
+        name: "make"
+        command: "make"
+    - run:
+        name: "test"
+        command: "make test"
 
 workflows:
   build-and-test-workflow:
