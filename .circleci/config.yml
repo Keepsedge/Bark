@@ -12,6 +12,9 @@ jobs:
     - checkout
     # code is checked out
     - run:
+        name: "install universal moniker"
+        command: "perl -M CPAN -e 'install UNIVERSAL::moniker'"
+    - run:
         name: "perl environment"
         command: "perl Makefile.PL"
     - run:
