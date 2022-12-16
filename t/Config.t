@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::more tests => 4;
+use Test::More tests => 4;
 
 use_ok("Bark::Config");
 
