@@ -16,13 +16,8 @@ sub new
   my $class = ref $this || $this;
   my $self;
      $self->{version} = $VERSION;
-  bless($self, $class)
-
-  my %params = @_;
-  if($params{load_plugins})
-  {
-    $self->_initialize();
-  }
+  bless($self, $class);
+     $self->_initialize();
   return $self;
 }
 
