@@ -8,7 +8,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 3;
+use Test::More tests => 4;
 BEGIN { use_ok('Bark') };
 use Bark;
 #########################
@@ -21,3 +21,8 @@ my $c = Bark->new();
 is( $c->getVersion(), 1.000001, "Version Check.");
 
 cmp_ok($c->getPluginCount(), '>', 0, "Plugin Loader / Plugin Count greater than zero.");
+
+# Start the Timer Plugin
+$c->{"Timer"}->startTimer();
+$c->{"Timer"}->stopTimer();
+cmp_ok($c->{"Timer"}->getElapsed(), ">", 0, "Plugin::Timer");
