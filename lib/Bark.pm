@@ -7,6 +7,8 @@ use warnings;
 use UNIVERSAL::moniker;
 use Module::Pluggable search_path=>'Bark::Plugins', initialize=>0;
 
+our $VERSION = 1.000001;
+
 
 sub new 
 {
