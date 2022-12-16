@@ -23,6 +23,7 @@ is( $c->getVersion(), 1.000001, "Version Check.");
 cmp_ok($c->getPluginCount(), '>', 0, "Plugin Loader / Plugin Count greater than zero.");
 
 # Start the Timer Plugin
-$c->{"Timer"}->startTimer();
-$c->{"Timer"}->stopTimer();
-cmp_ok($c->{"Timer"}->getElapsed(), ">", 0, "Plugin::Timer");
+$c->{"timer"}->startTimer();
+sleep(1);
+$c->{"timer"}->stopTimer();
+cmp_ok($c->{"timer"}->getElapsed(), ">", 0, "Plugin::Timer");
