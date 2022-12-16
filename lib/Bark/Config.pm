@@ -62,7 +62,7 @@ sub _sort
     my @keys = sort(keys($self->{_config}));
     my %config = ();
     foreach my $key (@keys) {
-        $config->{$key} = $self->{_config}->{$key};
+        $config{$key} = $self->{_config}->{$key};
     }
     $self->{_config} = $config;
 }
