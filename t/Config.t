@@ -9,8 +9,8 @@ can_ok($ch, qw/setConfigFile readConfigFile writeConfigFile setValue getValue _s
 
 my $configFile = "testConfigFile.cfg";
 $ch->setConfigFile($configFile);
-$ch->addValue("test.config.option", "test.config.value");
-$ch->addValue("test.config.sqlite", "data.sqlite");
+$ch->setValue("test.config.option", "test.config.value");
+$ch->setValue("test.config.sqlite", "data.sqlite");
 
 is($ch->getValue("test.config.option"), "test.config.value", "setValue() | getValue()");
 $ch->writeConfigFile();

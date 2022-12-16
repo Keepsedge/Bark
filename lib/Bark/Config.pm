@@ -83,5 +83,11 @@ sub getValue
     return $self->{_config}->{$key};
 }
 
+sub addValue
+{
+    my $self = shift;
+    return $self->setValue(@_);
+}
+
 1;
 __END__
