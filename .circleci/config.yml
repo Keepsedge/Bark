@@ -21,6 +21,9 @@ jobs:
         name: "install Module::Pluggable"
         command: "sudo perl -MCPAN -e 'install Module::Pluggable'"
     - run:
+        name: "install JSON::XS"
+        command: "sudo perl -MCPAN -e 'install JSON::XS'"
+    - run:
         name: "Makefile.PL"
         command: "perl Makefile.PL"
     - run:
