@@ -9,7 +9,13 @@ sub new {
     my $this = shift;
     my $class = ref $this || $this;
     my $self = {};
-    return bless($self, $class);
+    bless($self, $class);
+    my %params = @_;
+    if($params{file})
+    {
+        $self->setConfigFile($params{file});
+    }
+    return $self;
 }
 
 sub setConfigFile
@@ -23,10 +29,25 @@ sub setConfigFile
     $self->{_configfile} = $filename;
 }
 
+sub readFile
+{
+    my $self = shift;
+    open(FH "<", $self->{_configFile}) or carp "Can not open config file.\n $_";
+    my %config = ();
+    while(<FH>)
+    {
+        my $line = $_;
+        my ($key, $value) = split("=",$line);
+        $config{$key} = $value;
+    }
+    close FH;
+    $self->{_config} = %config;
+}
+
 sub writeToFile
 {
     my $self = shift;
-    open(FH, ">+", $self->{_configfile}) or carp "Can not open config file.";
+    open(FH, ">+", $self->{_configfile}) or carp "Can not open config file.\n $_";
     $self->_sort();
     foreach my $key (keys(%{$self->{_config}}))
     {  
