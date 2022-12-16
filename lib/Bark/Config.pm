@@ -38,6 +38,7 @@ sub readConfigFile
     {
         my $line = $_;
         my ($key, $value) = split("=",$line);
+        chomp($value);
         $config{$key} = $value;
     }
     close FH;
@@ -73,7 +74,7 @@ sub setValue
     my ($key, $value) = @_;
 
     $self->{_config}->{$key} = $value;
-    $self->_sort();
+    # $self->_sort();
 }
 
 sub getValue
