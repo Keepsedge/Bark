@@ -59,7 +59,7 @@ sub writeToFile
 sub _sort
 {
     my $self = shift;
-    my @keys = sort(keys($self->{_config}));
+    my @keys = sort(keys(%{$self->{_config}}));
     my %config = ();
     foreach my $key (@keys) {
         $config{$key} = $self->{_config}->{$key};
