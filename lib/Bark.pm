@@ -27,8 +27,8 @@ sub _initialize
   $self->{_plugin_count} = 0;
   foreach my $plugin ($self->plugins())
   {
-    eval "use $plugin"
-    if(!$@)
+    eval "use $plugin";
+    if(! $@)
     {
       my $shortname = $plugin->moniker();
       $self->{$shortname} = $plugin->load();
