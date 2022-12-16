@@ -46,7 +46,10 @@ sub getPluginCount {
   return $self->{_plugin_count}
 }
 
-
+sub getVersion {
+  my $self = shift;
+  return $self->{version};
+}
 
 1;
 __END__
