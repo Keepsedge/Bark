@@ -18,6 +18,6 @@ use Bark;
 
 my $c = Bark->new();
 
-is( $c->getVersion(), 1.000001, "Version Check");
+is( $c->getVersion(), 1.000001, "Version Check.");
 
-is($c->getPluginCount(), 1, "Plugin Loader");
+cmp_ok($c->getPluginCount(), '>', 0, "Plugin Loader / Plugin Count greater than zero.");
