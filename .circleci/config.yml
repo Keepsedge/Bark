@@ -13,7 +13,7 @@ jobs:
     # code is checked out
     - run:
         name: "CPAN fast configure"
-        command: "sh contrib/install.sh"
+        command: "sh project/contrib/install.sh"
     - run:
         name: "install universal moniker"
         command: "perl -MCPAN -e 'install UNIVERSAL::moniker'"
