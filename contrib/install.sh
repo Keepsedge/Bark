@@ -1,4 +1,4 @@
 #!/bin/bash
 PERLLIB=${HOME}/.cpan/CPAN/
 mkdir -p ${PERLLIB}
-install contrib/MyConfig.pm ${PERLLIB}
+sudo install contrib/MyConfig.pm ${PERLLIB}
