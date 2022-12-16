@@ -29,7 +29,7 @@ sub setConfigFile
     $self->{_configfile} = $filename;
 }
 
-sub readFile
+sub readConfigFile
 {
     my $self = shift;
     open(FH "<", $self->{_configFile}) or carp "Can not open config file.\n $_";
@@ -82,3 +82,6 @@ sub getValue
     my $key = shift;
     return $self->{_config}->{$key};
 }
+
+1;
+__END__
