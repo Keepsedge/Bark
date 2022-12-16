@@ -64,7 +64,7 @@ sub _sort
     foreach my $key (@keys) {
         $config{$key} = $self->{_config}->{$key};
     }
-    $self->{_config} = $config;
+    $self->{_config} = %config;
 }
 
 sub setValue
