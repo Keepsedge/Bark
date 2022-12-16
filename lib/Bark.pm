@@ -31,7 +31,7 @@ sub _initialize
     if(! $@)
     {
       my $shortname = $plugin->moniker();
-      $self->{lc($shortname)} = $plugin->load();
+      $self->{ucfirst($shortname)} = $plugin->load();
       $self->{_plugin_count}++;
     }
     else
