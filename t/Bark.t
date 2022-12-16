@@ -8,7 +8,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 2;
+use Test::More tests => 3;
 BEGIN { use_ok('Bark') };
 use Bark;
 #########################
@@ -20,4 +20,4 @@ my $c = Bark->new();
 
 is( $c->getVersion(), 1.000001, "Version Check");
 
-is (($c->getPluginCount() > 0), 1, "Plugin Loader");
+is($c->getPluginCount(), 1, "Plugin Loader");
