@@ -16,7 +16,7 @@ jobs:
         command: "sh contrib/install.sh"
     - run:
         name: "install universal moniker"
-        command: "perl -MCPAN -e 'install UNIVERSAL::moniker'"
+        command: "sudo perl -MCPAN -e 'install UNIVERSAL::moniker'"
     - run:
         name: "perl environment"
         command: "perl Makefile.PL"
