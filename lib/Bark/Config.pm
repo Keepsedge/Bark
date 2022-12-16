@@ -32,7 +32,7 @@ sub setConfigFile
 sub readConfigFile
 {
     my $self = shift;
-    open(FH "<", $self->{_configFile}) or carp "Can not open config file.\n $_";
+    open(FH, "<", $self->{_configFile}) or carp "Can not open config file.\n $_";
     my %config = ();
     while(<FH>)
     {
