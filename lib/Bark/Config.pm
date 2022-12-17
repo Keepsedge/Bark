@@ -14,7 +14,10 @@ sub new {
     if($params{file})
     {
         $self->setConfigFile($params{file});
-        $self->readConfigFile();
+        if( -e $self->{_configfile})
+        {
+            $self->readConfigFile();
+        }
     }
     return $self;
 }
