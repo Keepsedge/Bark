@@ -14,6 +14,7 @@ sub new {
     if($params{file})
     {
         $self->setConfigFile($params{file});
+        $self->readConfigFile();
     }
     return $self;
 }
@@ -54,6 +55,21 @@ sub writeConfigFile
     {
         print FH (sprintf("%s=%s\n",$key, $self->getValue($key)));
     }
+    close FH;
+}
+
+sub readConfigFile
+{
+    my $self = shift;
+    open(FH, "<", $self->{_configfile})
+        or die sprintf("unable to open %s", $self->{_configfile});
+
+    foreach my $line(<FH>) {
+        my ($key, $value) = split("=", $line);
+        $self->{_config}->{$key} = $value;
+    }
+    close FH;
+
 }
 
 1;

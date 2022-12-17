@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 2;
+use Test::More tests => 3;
 
 use_ok("Bark::Config");
 
@@ -16,6 +16,9 @@ is($config->getValue("database.driver"), "dbd:Pg", "getValue()");
 ## test writing config files
 $config->writeConfigFile();
 
-my $output = `cat config.cfg`;
-print STDERR $output;
+undef $config;
+
+my $cfg = Bark::Config->new(file=>"config.cfg");
+
+is($cfg->getValue("database.driver"), "dbd:Pg", "getValue() after write/read");
 
