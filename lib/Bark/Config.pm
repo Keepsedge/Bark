@@ -73,7 +73,6 @@ sub readConfigFile
         $self->{_config}->{$key} = $value;
     }
     close FH;
-
 }
 
 1;

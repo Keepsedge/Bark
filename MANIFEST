@@ -5,7 +5,7 @@ README
 README.md
 LICENSE
 t/Bark.t
-t/Config.t
+t/Config.tx
 lib/Bark.pm
 lib/Bark/Config.pm
 lib/Bark/Plugins/Timer.pm
