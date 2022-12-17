@@ -24,5 +24,3 @@ if($output ne "") {
     fail("Convience Methods");
 }
 
-print STDERR(sprintf("\n%s\n",$output));
-
