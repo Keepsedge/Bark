@@ -21,7 +21,7 @@ my $output = `cat logfile.log`;
 if($output ne "") {
     pass("Convience Methods");
 } else {
-    fail("Convience Methods"):
+    fail("Convience Methods");
 }
 
 print STDERR(sprintf("\n%s\n",$output));
