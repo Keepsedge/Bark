@@ -11,7 +11,7 @@ sub new
     my %params = @_;
     if($params{file})
     {
-        $self->{_logfile} = $params{logfile};
+        $self->{_logfile} = $params{file};
     }
     return $self;
 }
@@ -23,11 +23,6 @@ sub writeLogToFile
 
     return undef if(!defined($level));
     return undef if(!defined($message));
-
-    if(! -e $self->{_logfile}) {
-        my $fn = $self->{_logfile};
-        my $cmd = `touch $fn`;
-    }
 
     open(LOG, ">>", $self->{_logfile}) 
         or die sprintf("Unable to open log file %s\n%s", $self->{_logfile}, $!);
