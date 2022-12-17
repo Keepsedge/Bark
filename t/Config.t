@@ -1,6 +1,5 @@
 use strict;
 use warnings;
-use Data::Dumper;
 use Test::More tests => 3;
 
 use_ok("Bark::Config");
@@ -20,8 +19,5 @@ $config->writeConfigFile();
 undef $config;
 
 my $cfg = Bark::Config->new(file=>"config.cfg");
-
-print STDERR Dumper($cfg);
-
 is($cfg->getValue("database.driver"), "dbd:Pg", "getValue() after write/read");
 
