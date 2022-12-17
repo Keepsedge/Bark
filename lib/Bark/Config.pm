@@ -43,5 +43,18 @@ sub getValue
     return $self->{_config}->{$key};
 }
 
+sub writeConfigFile
+{
+    my $self = shift;
+    open(FH, "+>", $self->{_configfile}) 
+        or die sprintf("unable to open %s", $self->{_configfile});
+    
+    my @keys = sort keys(%{$self->{_config}});
+    foreach my $key (@keys)
+    {
+        print FH (sprintf("%s=%s\n",$key, $self->getValue($key)));
+    }
+}
+
 1;
 __END__
