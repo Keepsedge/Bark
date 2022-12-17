@@ -14,7 +14,7 @@ $config->setValue("datanase.user","webui");
 is($config->getValue("database.driver"), "dbd:Pg", "getValue()");
 
 ## test writing config files
-$config->wirteConfigFile();
+$config->writeConfigFile();
 
 my $output = `cat config.cfg`;
 print STDERR $output;
