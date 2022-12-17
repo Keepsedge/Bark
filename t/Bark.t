@@ -27,3 +27,5 @@ $c->{"Timer"}->startTimer();
 sleep(1);
 $c->{"Timer"}->stopTimer();
 cmp_ok($c->{"Timer"}->getElapsed(), ">", 0, "Plugin::Timer");
+
+
