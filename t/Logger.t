@@ -7,7 +7,7 @@ use Bark::Logger;
 my $logger = Bark::Logger->new(logfile=>'logfile.log');
 
 
-$logger->writeToLogfile("DEBUG", "This is a test.");
+$logger->writeLogfile("DEBUG", "This is a test.");
 my $output = `cat logfile.log`;
 
 print STDERR ($output);
