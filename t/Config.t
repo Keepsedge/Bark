@@ -4,7 +4,7 @@ use Test::More tests => 2;
 
 use_ok("Bark::Config");
 
-my $config = Bark::Config->new("config.cfg");
+my $config = Bark::Config->new(file=>"config.cfg");
 
 $config->setValue("database.driver", "dbd:Pg");
 $config->setValue("database.host", "docker.localdomain");
