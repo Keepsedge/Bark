@@ -11,5 +11,5 @@ $config->setValue("database.host", "docker.localdomain");
 $config->setValue("database.port", "6789");
 $config->setValue("datanase.user","webui");
 
-is($config->getValue("database.driver", "dbd:Pg", "getValue()"));
+is($config->getValue("database.driver"), "dbd:Pg", "getValue()");
 
