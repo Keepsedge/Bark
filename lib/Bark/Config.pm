@@ -29,52 +29,11 @@ sub setConfigFile
     $self->{_configfile} = $filename;
 }
 
-sub readConfigFile
-{
-    my $self = shift;
-    open(FH, "<", $self->{_configFile}) or carp "Can not open config file.\n $_";
-    my %config = ();
-    while(<FH>)
-    {
-        my $line = $_;
-        my ($key, $value) = split("=",$line);
-        chomp($value);
-        $config{$key} = $value;
-    }
-    close FH;
-    $self->{_config} = %config;
-}
-
-sub writeToFile
-{
-    my $self = shift;
-    open(FH, ">+", $self->{_configfile}) or carp "Can not open config file.\n $_";
-    $self->_sort();
-    foreach my $key (keys(%{$self->{_config}}))
-    {  
-        print FH ($key."=".$self->getValue($key)."\n");
-    }
-    close FH;
-}
-
-sub _sort
-{
-    my $self = shift;
-    my @keys = sort(keys(%{$self->{_config}}));
-    my %config = ();
-    foreach my $key (@keys) {
-        $config{$key} = $self->{_config}->{$key};
-    }
-    $self->{_config} = %config;
-}
-
 sub setValue
 {
     my $self = shift;
     my ($key, $value) = @_;
-
     $self->{_config}->{$key} = $value;
-    # $self->_sort();
 }
 
 sub getValue
@@ -82,12 +41,6 @@ sub getValue
     my $self = shift;
     my $key = shift;
     return $self->{_config}->{$key};
-}
-
-sub addValue
-{
-    my $self = shift;
-    return $self->setValue(@_);
 }
 
 1;

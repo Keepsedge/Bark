@@ -1,26 +1,15 @@
 use strict;
 use warnings;
-use Test::More tests => 4;
+use Test::More tests => 2;
 
 use_ok("Bark::Config");
 
-my $ch = Bark::Config->new();
-can_ok($ch, qw/setConfigFile readConfigFile writeConfigFile setValue getValue _sort/);
+my $config = Bark::Config->new("config.cfg");
 
-my $configFile = "testConfigFile.cfg";
-$ch->setConfigFile($configFile);
-$ch->setValue("test.config.option", "test.config.value");
-$ch->setValue("test.config.sqlite", "data.sqlite");
+$config->setValue("database.driver", "dbd:Pg");
+$config->setValue("database.host", "docker.localdomain");
+$config->setValue("database.port", "6789");
+$config->setValue("datanase.user","webui");
 
-is($ch->getValue("test.config.option"), "test.config.value", "setValue() | getValue()");
-$ch->writeConfigFile();
-
-if(-e $configFile) {
-    pass("File Creation");
-} else {
-    fail("File Creation");
-}
-
-
-
+is($config->getValue("database.driver", "dbd:Pg", "getValue()"));
 
