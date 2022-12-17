@@ -1,6 +1,7 @@
 package Bark::Logger;
 use strict;
 use warnings;
+use DateTime;
 
 sub new 
 {
@@ -24,10 +25,13 @@ sub writeLogToFile
     return undef if(!defined($level));
     return undef if(!defined($message));
 
+    my $dt = DateTime->now();
+    my $strDate = $dt->strftime('%m/%d/%Y %H:%M:%S');
+
     open(LOG, ">>", $self->{_logfile}) 
         or die sprintf("Unable to open log file %s\n%s", $self->{_logfile}, $!);
     
-    print LOG (sprintf("[%s] %s", $level, $message));
+    print LOG (sprintf("[%s][%s] %s\n",$strDate, $level, $message));
     close LOG;
 }
 

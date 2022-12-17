@@ -18,6 +18,11 @@ $logger->fatal("Fatal Error Message");
 
 
 my $output = `cat logfile.log`;
-print STDERR ("\n".$output."\n");
-pass("Convience Methods");
+if($output ne "") {
+    pass("Convience Methods");
+} else {
+    fail("Convience Methods"):
+}
+
+print STDERR(sprintf("\n%s\n",$output));
 
