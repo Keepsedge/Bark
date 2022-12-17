@@ -31,6 +31,36 @@ sub writeLogToFile
     close LOG;
 }
 
+sub debug
+{
+    my $self = shift;
+    my $message = shift;
+    $self->writeLogToFile("DEBUG", $message);
+}
+sub warn
+{
+    my $self = shift;
+    my $message = shift;
+    $self->writeLogToFile("WARN", $message);
+}
+sub error
+{
+    my $self = shift;
+    my $message = shift;
+    $self->writeLogToFile("ERROR", $message);
+}
+sub severe
+{
+    my $self = shift;
+    my $message = shift;
+    $self->writeLogToFile("SEVERE", $message);
+}
+sub fatal
+{
+    my $self = shift;
+    my $message = shift;
+    $self->writeLogToFile("FATAL", $message);
+}
 
 
 1;

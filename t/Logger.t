@@ -1,14 +1,23 @@
 use strict;
 use warnings;
-use Test::More tests=>1;
+use Test::More tests=>3;
 
 use_ok("Bark::Logger");
 use Bark::Logger;
 
 my $logger = Bark::Logger->new( file => 'logfile.log' );
-
-
 $logger->writeLogToFile("DEBUG", "This is a test.");
-my $output = `cat logfile.log`;
+pass("writeLogToFile");
 
-print STDERR ($output);
+
+$logger->debug("Debug Message");
+$logger->warn("Warning message");
+$logger->error("Error Message");
+$logger->severe("Severe message");
+$logger->fatal("Fatal Error Message");
+
+
+my $output = `cat logfile.log`;
+print STDERR ("\n".$output."\n");
+pass("Convience Methods");
+
