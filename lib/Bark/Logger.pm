@@ -23,11 +23,20 @@ sub writeLogToFile
 
     return undef if(!defined($level));
     return undef if(!defined($message));
-
-    # *NIX Only
-    my $date = `date "+%m/%d/%Y %H:%M:%S"`;
-    chomp($date);
-
+    my $date;
+    if($^O =~/MSWIN/)
+    {
+        # Support for windows
+        my $sysdate = `date`;
+        chomp($sysdate);
+        my ($dayofweek, $mon, $day, $year, $time, $ampm) = split(" ", $sysdate);
+        $date = sprintf("%s/%s/%s %s %s",$month, $day, $year, $time, $ampm);
+        
+    } else {
+        # *NIX Only
+        $date = `date "+%m/%d/%Y %H:%M:%S"`;
+        chomp($date);
+    }
     open(LOG, ">>", $self->{_logfile}) 
         or die sprintf("Unable to open log file %s\n%s", $self->{_logfile}, $!);
     
