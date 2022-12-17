@@ -68,7 +68,8 @@ sub readConfigFile
         or die sprintf("unable to open %s", $self->{_configfile});
 
     foreach my $line(<FH>) {
-        my ($key, $value) = split("=", chomp($line));
+        my ($key, $value) = split("=", $line);
+        chomp($value);
         $self->{_config}->{$key} = $value;
     }
     close FH;
