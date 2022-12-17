@@ -16,8 +16,11 @@ $logger->error("Error Message");
 $logger->severe("Severe message");
 $logger->fatal("Fatal Error Message");
 
+my $output;
 
-my $output = `cat logfile.log`;
+ if($^O =~/mswin32/i) { $output = `type logfile.log`; }
+ else { $output = `cat logfile.log` }
+
 if($output ne "") {
     pass("Convience Methods");
 } else {
