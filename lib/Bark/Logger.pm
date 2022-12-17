@@ -9,10 +9,11 @@ sub new
     my $self = {};
     bless($self, $class);
     my %params = @_;
-    if($params{logfile})
+    if($params{file})
     {
         $self->{_logfile} = $params{logfile};
     }
+    return $self;
 }
 
 sub writeLogToFile
@@ -22,7 +23,7 @@ sub writeLogToFile
 
     return undef if(!defined($level));
     return undef if(!defined($message));
-    
+
     open(LOG, ">>", $self->{_logfile}) 
         or die sprintf("Unable to open log file %s\n%s", $self->{_logfile}, $!);
     
