@@ -3,6 +3,7 @@ use strict;
 use warnings;
 
 use Bark::DBI::User;
+use Bark::DBI::UserAuth;
 use Bark::Utils;
 use Bark::Logger;
 
@@ -24,7 +25,7 @@ sub getUserById
 {
     my $self = shift;
     my %params = @_;
-    if(! %params{id}) {
+    if(! $params{id}) {
         $self->{_logger}->error("Call to getUserById requires argument 'id'");
         return undef;
     }
@@ -103,7 +104,46 @@ sub addUser
         userid => $user->id(),
         password=> Bark::Utils->hashValue($params{password})
     });
+
+    if(!defined($auth)) {
+        $self->{_logger}->severe("Unable to create new user auth record");
+        $user->delete();
+        return undef;
+    }
     return $user;
 }
 
+sub checkLogin
+{
+    my $self = shift;
+    my %params = @_;
 
+    if(! $params{username}) {
+        $self->{_logger}->error("Call to checkLogin requires argument 'username'");
+        return undef;
+    }
+    if(! $params{password}) {
+        $self->{_logger}->error("Call to checkLogin requires argument 'password'");
+        return undef;
+    }
+
+    my $user = $self->getUserByUsername(username=>$params{username});
+    if(! defined($user)) {
+        $self->{_logger}->error(sprintf("Unable to locate user record %s", $params{username}));
+        return undef;
+    }
+    my $auth = Bark::DBI::UserAuth->retrieve(userid=>$user->id);
+    if(!defined($auth)) {
+        $self->{_logger}->fatal("UserID Does not link to a vlid authenticaton record.");
+        return undef;
+    }
+    my $encPass = Bark::Utils->hashValue($params{password});
+    if($encPass ne $auth->password) {
+        $self->{_logger}->error("Invalid Login.");
+        return undef;
+    }
+    return $user;
+}
+
+1;
+__END__
