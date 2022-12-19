@@ -21,6 +21,21 @@ jobs:
         name: "install Module::Pluggable"
         command: "sudo perl -MCPAN -e 'install Module::Pluggable'"
     - run:
+        name: "install DBI"
+        command: "sudo perl -MCPAN -e 'install DBI'"
+    - run:
+        name: "install Ima::DBI"
+        command: "sudo perl -MCPAN -e 'install Ima::DBI'"
+    - run:
+        name: "install Class::Accessor"
+        command: "sudo perl -MCPAN -e 'install Class::Accessor'"
+    - run:
+        name: "install Class::DBI"
+        command: "sudo perl -MCPAN -e 'install Class::DBI'"
+    - run:
+        name: "install Class::DBI::SQLite"
+        command: "sudo perl -MCPAN -e 'install Class::DBI::SQLite'"
+    - run:
         name: "Makefile.PL"
         command: "perl Makefile.PL"
     - run:
