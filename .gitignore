@@ -7,6 +7,11 @@
 *.pm.tdy
 *.bs
 
+# Dev Artifacts
+*.sqlite
+logfile.log
+config.cfg
+
 # Devel::Cover
 cover_db/
 

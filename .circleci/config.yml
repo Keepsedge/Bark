@@ -33,6 +33,9 @@ jobs:
         name: "install Class::DBI"
         command: "sudo perl -MCPAN -e 'install Class::DBI'"
     - run:
+        name: "install Class::DBI::SQLite"
+        command: "sudo perl -MCPAN -e 'install Class::DBI::SQLite'"
+    - run:
         name: "Makefile.PL"
         command: "perl Makefile.PL"
     - run:
