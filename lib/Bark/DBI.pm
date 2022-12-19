@@ -1,6 +1,5 @@
 package Bark::DBI;
-use base Class::DBI::SQLite;
-
+use base Class::DBI;
 
 __PACKAGE__->connection('dbi:SQLite:dbname=bark.sqlite', "","");
 
