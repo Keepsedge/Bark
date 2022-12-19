@@ -57,3 +57,5 @@ if(defined($failLogin)) {
 } else {
     pass("Intentional Failed Login Check");
 }
+
+my $cleanup = `rm bark.sqlite`;
