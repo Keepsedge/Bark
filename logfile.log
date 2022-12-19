@@ -1,0 +1,18 @@
+[11/352/0122 04:02:43][DEBUG] This is a test.
+[11/352/0122 04:02:43][DEBUG] Debug Message
+[11/352/0122 04:02:43][WARN] Warning message
+[11/352/0122 04:02:43][ERROR] Error Message
+[11/352/0122 04:02:43][SEVERE] Severe message
+[11/352/0122 04:02:43][FATAL] Fatal Error Message
+[11/352/0122 04:03:23][DEBUG] This is a test.
+[11/352/0122 04:03:23][DEBUG] Debug Message
+[11/352/0122 04:03:23][WARN] Warning message
+[11/352/0122 04:03:23][ERROR] Error Message
+[11/352/0122 04:03:23][SEVERE] Severe message
+[11/352/0122 04:03:23][FATAL] Fatal Error Message
+[11/352/0122 04:03:32][DEBUG] This is a test.
+[11/352/0122 04:03:32][DEBUG] Debug Message
+[11/352/0122 04:03:32][WARN] Warning message
+[11/352/0122 04:03:32][ERROR] Error Message
+[11/352/0122 04:03:32][SEVERE] Severe message
+[11/352/0122 04:03:32][FATAL] Fatal Error Message

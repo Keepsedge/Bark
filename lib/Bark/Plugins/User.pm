@@ -4,8 +4,9 @@ use warnings;
 
 use Bark::DBI::User;
 use Bark::DBI::UserAuth;
-use Bark::Utils;
 use Bark::Logger;
+
+use constant SALT => '0zrecp7syr';
 
 # All Bark plugins must have a load method which servs as
 #   a constructor. We don't use 'new()' as under some circumstances
@@ -90,9 +91,23 @@ sub addUser
         $error = $error +1;
     }
 
+    # Check user already exists
+    my $check_uname = Bark::DBI::User->retrieve(username=>$params{username});
+    my $check_email = Bark::DBI::User->retrieve(email=>$params{email});
+
+    if(defined($check_uname)) {
+        $self->{_logger}->error("Username already in use.");
+        return undef;
+    }
+    if(defined($check_email)) {
+        $self->{_logger}->error("Email address already in use.");
+        return undef;
+    }
+
     my $user = Bark::DBI::User->insert({
         username=>$params{username},
-        email=>$params{email}
+        email=>$params{email},
+        active=>'true'
     });
 
     if(!defined($user)) {
@@ -102,7 +117,7 @@ sub addUser
 
     my $auth = Bark::DBI::UserAuth->insert({
         userid => $user->id(),
-        password=> Bark::Utils->hashValue($params{password})
+        password=> crypt($params{password},SALT)
     });
 
     if(!defined($auth)) {
@@ -137,7 +152,7 @@ sub checkLogin
         $self->{_logger}->fatal("UserID Does not link to a vlid authenticaton record.");
         return undef;
     }
-    my $encPass = Bark::Utils->hashValue($params{password});
+    my $encPass = crypt($params{password},SALT);
     if($encPass ne $auth->password) {
         $self->{_logger}->error("Invalid Login.");
         return undef;
